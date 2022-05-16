@@ -1,5 +1,7 @@
 [What was fixed](https://github.com/kumarasinghe/slimauth/issues/6#issuecomment-1128108928)
 
+or was it? i'm still testing it
+
 <h1 align="center">SlimAuth - The Simplest NodeJS User Authentication Middleware</h1>
 
 ### `slimauth` lifts follwing work for you:
