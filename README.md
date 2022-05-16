@@ -1,6 +1,7 @@
-[What was fixed](https://github.com/kumarasinghe/slimauth/issues/6#issuecomment-1128108928)
+[the origin](https://github.com/kumarasinghe/slimauth/issues/6#issuecomment-1128108928)
 
-or was it? i'm still testing it
+this middleware is unusable through npm yet, will get to that soon
+
 
 <h1 align="center">SlimAuth - The Simplest NodeJS User Authentication Middleware</h1>
 
