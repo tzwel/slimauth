@@ -29,8 +29,8 @@ const bcrypt = require('bcryptjs')
 /********************************** CONSTANTS ***********************************/
 
 const AUTH_TOKEN_LENGTH = 40
-const AUTH_TOKEN_AGE = 30 * 24 * 60 * 60 * 1000 // 30 days
-const DATA_DIR = require('path').dirname(require.main.filename) + '/slimauth'
+let AUTH_TOKEN_AGE = 30 * 24 * 60 * 60 * 1000 // 30 days
+const DATA_DIR = require('path').dirname("/slimauth")
 const ACCOUNT_STORE_FILE = DATA_DIR + '/accounts.json'
 const TOKEN_STORE_FILE = DATA_DIR + '/tokens.json'
 let accountStore, tokenStore, loginURL
