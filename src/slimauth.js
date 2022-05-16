@@ -25,6 +25,7 @@ SOFTWARE.
 const fs = require('fs')
 const crypto = require('crypto')
 const bcrypt = require('bcryptjs')
+const { log } = require('console')
 
 /********************************** CONSTANTS ***********************************/
 
@@ -96,6 +97,7 @@ class SlimAuth {
             }
             // incorrect password
             else if (accountStore[userID] != getTextHash(password)) {
+            //else if (accountStore[userID] != getTextHash(password)) {
                 reject(new Error('Incorrect password'))
             }
             // account exists
@@ -152,15 +154,19 @@ class SlimAuth {
 
             let passwordHash = accountStore[userID]
 
+
             if (!passwordHash) {
                 reject(new Error(`${userID} does not exist`))
             }
-            // local password hash does not match with foreign password
-            else if (passwordHash != getTextHash(password.toString())) {
+ 
+            else if (!bcrypt.compareSync(password, passwordHash)) {
+       
                 reject(new Error('incorrect password'))
             }
             // passwords match
             else {
+
+                console.log("poszlo");
 
                 // delete any existing access token of the user
                 for (let token in tokenStore) {
@@ -279,8 +285,12 @@ function writeJSON(filename, object) {
 returns bcrypt hash checksum of given data
 */
 function getTextHash(data) {
-    let salt = bcrypt.genSaltSync(10)
-    return bcrypt.hashSync(data.toString(), salt)
+  //  let salt = bcrypt.genSaltSync(10)
+  //  return bcrypt.hashSync(data, salt);
+
+    //return bcrypt.hashSync(data.toString(), salt)
+    const passwordHash = bcrypt.hashSync(data, 10);
+    return passwordHash;
 }
 
 /************************************ MAIN *************************************/
