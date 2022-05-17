@@ -35,6 +35,9 @@ const MIN_PASSWORD_LENGTH = 2;
 const MAX_PASSWORD_LENGTH = 30;
 const MIN_USERNAME_LENGTH = 3;
 const MAX_USERNAME_LENGTH = 30;
+
+const USERNAME_REGEX =  /^[a-z0-9_-]{3,15}$/
+
 let AUTH_TOKEN_AGE = 30 * 24 * 60 * 60 * 1000 // 30 days
 const DATA_DIR = require('path').dirname(__dirname + "/slimauth")
 const ACCOUNT_STORE_FILE = DATA_DIR + '/accounts.json'
@@ -92,6 +95,11 @@ class SlimAuth {
                 return
             }
 
+            if (!USERNAME_REGEX.test(userID)) {
+                reject(new Error('Username invalid'))
+                return
+            }
+        
             // account does not exist
             else {
 
@@ -101,7 +109,9 @@ class SlimAuth {
                 // save store to disk
                 writeJSON(ACCOUNT_STORE_FILE, accountStore)
 
+
                 resolve()
+
             }
 
         })
@@ -310,7 +320,6 @@ function writeJSON(filename, object) {
 returns bcrypt hash checksum of given data
 */
 function getTextHash(data) {
-  
     const passwordHash = bcrypt.hashSync(data, 10);
     return passwordHash;
 }
