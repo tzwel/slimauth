@@ -2,6 +2,7 @@
 MIT License
 
 Copyright (c) 2020 Naveen Kumarasinghe
+Copyright (c) 2022 Tzwel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -93,7 +94,7 @@ class SlimAuth {
 
             // if account does not exists
             if (!accountStore[userID]) {
-                reject(new Error('User account des not exists'))
+                reject(new Error('User account does not exist'))
             }
             // incorrect password
             else if (accountStore[userID] != getTextHash(password)) {
@@ -154,7 +155,6 @@ class SlimAuth {
 
             let passwordHash = accountStore[userID]
 
-
             if (!passwordHash) {
                 reject(new Error(`${userID} does not exist`))
             }
@@ -165,8 +165,6 @@ class SlimAuth {
             }
             // passwords match
             else {
-
-                console.log("poszlo");
 
                 // delete any existing access token of the user
                 for (let token in tokenStore) {
@@ -285,10 +283,7 @@ function writeJSON(filename, object) {
 returns bcrypt hash checksum of given data
 */
 function getTextHash(data) {
-  //  let salt = bcrypt.genSaltSync(10)
-  //  return bcrypt.hashSync(data, salt);
-
-    //return bcrypt.hashSync(data.toString(), salt)
+  
     const passwordHash = bcrypt.hashSync(data, 10);
     return passwordHash;
 }
