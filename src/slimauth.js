@@ -36,12 +36,17 @@ const MAX_PASSWORD_LENGTH = 30;
 const MIN_USERNAME_LENGTH = 3;
 const MAX_USERNAME_LENGTH = 30;
 
-const USERNAME_REGEX =  /^[a-z0-9_-]{3,15}$/
+// best to be left unchanged, but you can use your own regex or just leave the variable empty like so:
+//const USERNAME_REGEX;
+const USERNAME_REGEX = new RegExp(`^[a-z0-9_-]{${MIN_USERNAME_LENGTH},${MAX_USERNAME_LENGTH}}$`);
 
 let AUTH_TOKEN_AGE = 30 * 24 * 60 * 60 * 1000 // 30 days
 const DATA_DIR = require('path').dirname(__dirname + "/slimauth")
+
+// the directories are created automatically
 const ACCOUNT_STORE_FILE = DATA_DIR + '/accounts.json'
 const TOKEN_STORE_FILE = DATA_DIR + '/tokens.json'
+
 let accountStore, tokenStore, loginURL
 let privateURLObject = {}
 
