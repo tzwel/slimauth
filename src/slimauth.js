@@ -31,6 +31,10 @@ const { log } = require('console')
 /********************************** CONSTANTS ***********************************/
 
 const AUTH_TOKEN_LENGTH = 40
+const MIN_PASSWORD_LENGTH = 2;
+const MAX_PASSWORD_LENGTH = 30;
+const MIN_USERNAME_LENGTH = 3;
+const MAX_USERNAME_LENGTH = 30;
 let AUTH_TOKEN_AGE = 30 * 24 * 60 * 60 * 1000 // 30 days
 const DATA_DIR = require('path').dirname(__dirname + "/slimauth")
 const ACCOUNT_STORE_FILE = DATA_DIR + '/accounts.json'
@@ -71,6 +75,23 @@ class SlimAuth {
                 reject(new Error('User account already exists'))
                 return
             }
+
+            if (password.length > MAX_PASSWORD_LENGTH) {
+                reject(new Error('Max password length exceeded'))
+                return
+            } else if (password.length < MIN_PASSWORD_LENGTH) {
+                reject(new Error('Password too short'))
+                return
+            }
+
+            if (userID.length > MAX_USERNAME_LENGTH) {
+                reject(new Error('Max username length exceeded'))
+                return
+            } else if (userID.length < MIN_USERNAME_LENGTH) {
+                reject(new Error('Username too short'))
+                return
+            }
+
             // account does not exist
             else {
 
@@ -157,6 +178,12 @@ class SlimAuth {
 
             if (!passwordHash) {
                 reject(new Error(`${userID} does not exist`))
+            }
+
+            // to prevent attacks
+            if (password.length > MAX_PASSWORD_LENGTH) {
+                reject(new Error('Max password length exceeded'))
+                return
             }
  
             else if (!bcrypt.compareSync(password, passwordHash)) {
