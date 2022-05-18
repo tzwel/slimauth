@@ -99,8 +99,9 @@ class SlimAuth {
                 reject(new Error('Username too short'))
                 return
             }
+            
 
-            if (!USERNAME_REGEX.test(userID)) {
+            if (USERNAME_REGEX && !USERNAME_REGEX.test(userID)) {
                 reject(new Error('Username invalid'))
                 return
             }
