@@ -3,7 +3,7 @@
 this middleware is unusable through npm yet, will get to that soon
 
 
-<h1 align="center">SlimAuth - The Simplest NodeJS User Authentication Middleware</h1>
+<h1 align="center">SlimAuth+ - The Simplest NodeJS User Authentication Middleware</h1>
 
 ### `slimauth` lifts follwing work for you:
 
